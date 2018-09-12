@@ -14,7 +14,10 @@ const CleanWebpackPluginOptions = {
 };
 
 module.exports = {
-  entry: path.join(rootPath, 'src/index.js'),
+  entry: {
+    app: path.join(rootPath, 'src/index.js'),
+    react: ['react', 'react-dom'],
+  },
   output: {
     filename: '[name].[hash].js',
     path: buildPath,
@@ -45,4 +48,15 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['build'], CleanWebpackPluginOptions),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      // cacheGroups: {
+      //   react: {
+      //     test: 'react',
+      //     name: 'react',
+      //   },
+      // },
+    },
+  },
 };
