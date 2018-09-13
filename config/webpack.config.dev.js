@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 const rootPath = path.join(__dirname, '..');
 const publicPath = path.join(rootPath, 'public');
@@ -44,5 +45,14 @@ module.exports = {
       inject: true,
     }),
     new CleanWebpackPlugin(['build'], CleanWebpackPluginOptions),
+    new webpack.HotModuleReplacementPlugin(),
   ],
+  devServer: {
+    port: 8080,
+    compress: true,
+    historyApiFallback: true,
+    hot: true,
+    noInfo: false,
+    open: true,
+  },
 };
