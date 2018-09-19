@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const rootPath = path.join(__dirname, '..');
 const publicPath = path.join(rootPath, 'public');
@@ -21,6 +23,7 @@ module.exports = {
     path: buildPath,
     // publicPath,
   },
+  // mode: 'production',
   mode: 'development',
   module: {
     rules: [
@@ -36,6 +39,14 @@ module.exports = {
           path.join(rootPath, 'node_modules'),
         ],
       },
+      {
+        test: /\.css$/,
+        // use: ['style-loader', 'css-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
+      },
     ],
   },
   plugins: [
@@ -46,6 +57,10 @@ module.exports = {
     }),
     new CleanWebpackPlugin(['build'], CleanWebpackPluginOptions),
     new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
+    }),
   ],
   devServer: {
     port: 8080,
@@ -53,6 +68,11 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     noInfo: false,
-    open: true,
+    // open: true,
+  },
+  optimization: {
+    minimizer: [
+      new OptimizeCssAssetsPlugin(),
+    ],
   },
 };
