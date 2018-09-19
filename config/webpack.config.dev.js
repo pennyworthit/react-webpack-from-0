@@ -41,12 +41,33 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // use: ['style-loader', 'css-loader'],
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]__[hash:7]',
+            },
+          },
+          'postcss-loader',
         ],
       },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]__[hash:7]',
+            },
+          },
+          'postcss-loader',
+          'sass-loader',
+        ],
+      }
     ],
   },
   plugins: [
