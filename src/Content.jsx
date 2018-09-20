@@ -1,16 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // import './Content.css';
 // import ContentStyles from './Content.css';
 import ContentStyles from './Content2.scss';
 
-export default class Content extends React.Component {
-  render() {
-    return (
-      <div className={ContentStyles.content2}>
-        I am content
-        <br />
-        {this.props.now}
-      </div>
-    );
-  }
-}
+const Content = (props) => {
+  const { now } = props;
+  return (
+    <div className={ContentStyles.content2}>
+      I am content
+      <br />
+      {now}
+    </div>
+  );
+};
+
+Content.propTypes = {
+  now: PropTypes.string,
+};
+
+Content.defaultProps = {
+  now: '',
+};
+
+export default Content;

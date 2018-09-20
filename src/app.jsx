@@ -1,5 +1,5 @@
 import React from 'react';
-import Content from './Content.jsx';
+import Content from './Content';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,10 +10,11 @@ export default class App extends React.Component {
   }
 
   render() {
+    const { now } = this.state;
     return (
       <div>
         <div>An App</div>
-        <Content now={this.state.now} />
+        <Content now={now} />
       </div>
     );
   }

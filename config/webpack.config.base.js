@@ -21,6 +21,9 @@ module.exports = {
     path: buildPath,
     // publicPath,
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -63,7 +66,7 @@ module.exports = {
           'postcss-loader',
           'sass-loader',
         ],
-      }
+      },
     ],
   },
   plugins: [
